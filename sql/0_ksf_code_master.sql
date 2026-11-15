@@ -35,6 +35,24 @@ INSERT IGNORE INTO `0_ksf_code_master` (`code_type`, `code_value`, `code_name`, 
 ('hrm.activity_code', 'DOCUMENT', 'Documentation', 'Documentation and technical writing', 'Use for writing docs, specs, comments', 1, 10),
 ('hrm.activity_code', 'DEPLOY', 'Deployment/Release', 'Deployment and release activities', 'Use for deploying code, releases', 1, 11);
 
+-- Seed common HRM bank types (used by ksf_FA_HRMBanks for PTO, VAC, STAT, SICK,
+-- education allowance, travel allowance, extended health care, etc.)
+INSERT IGNORE INTO `0_ksf_code_master` (`code_type`, `code_value`, `code_name`, `code_description`, `usage_instructions`, `is_active`, `sort_order`) VALUES
+('hrm.bank_type', 'PTO', 'Paid Time Off', 'General paid time off bank', 'Use for general paid time off', 1, 1),
+('hrm.bank_type', 'VAC', 'Vacation', 'Vacation leave bank', 'Use for approved vacation time off', 1, 2),
+('hrm.bank_type', 'STAT', 'Statutory Holiday', 'Statutory holiday bank', 'Use for statutory holiday time off', 1, 3),
+('hrm.bank_type', 'SICK', 'Sick Leave', 'Sick leave bank', 'Use for sick leave', 1, 4),
+('hrm.bank_type', 'EDU', 'Education Allowance', 'Education/training allowance bank', 'Use for education and training allowances', 1, 5),
+('hrm.bank_type', 'TRV', 'Travel Allowance', 'Travel allowance bank', 'Use for travel allowances', 1, 6),
+('hrm.bank_type', 'EHC', 'Extended Health Care', 'Extended health care allowance bank', 'Use for extended health care allowances', 1, 7);
+
+-- Seed common bank transaction types
+INSERT IGNORE INTO `0_ksf_code_master` (`code_type`, `code_value`, `code_name`, `code_description`, `usage_instructions`, `is_active`, `sort_order`) VALUES
+('hrm.bank_transaction_type', 'ACCRUE', 'Accrue', 'Accrue balance to bank', 'Use when accruing balance to the bank', 1, 1),
+('hrm.bank_transaction_type', 'USE', 'Use', 'Use balance from bank', 'Use when using balance from the bank', 1, 2),
+('hrm.bank_transaction_type', 'ADJUST', 'Adjustment', 'Manual adjustment', 'Use for manual adjustments', 1, 3),
+('hrm.bank_transaction_type', 'EXPIRE', 'Expire', 'Expired balance', 'Use when balance expires', 1, 4);
+
 -- Seed common pay grade codes
 INSERT IGNORE INTO `0_ksf_code_master` (`code_type`, `code_value`, `code_name`, `code_description`, `usage_instructions`, `is_active`, `sort_order`) VALUES
 ('hrm.pay_grade', 'E1', 'Entry Level', 'Entry-level professional grade', 'Grade for new hires with limited experience', 1, 1),
