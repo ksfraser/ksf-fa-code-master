@@ -94,6 +94,7 @@ class hooks_ksf_FA_CodeMaster extends hooks {
     public function RELATED_TO_FIELDS(&$data, $opts = null) {
         if (!isset($data['module']) || !is_string($data['module'])) { $data['error'] = 'RELATED_TO_FIELDS requires data[module]'; return null; }
         if (!isset($data['type']) || !is_string($data['type'])) { $data['error'] = 'RELATED_TO_FIELDS requires data[type]'; return null; }
+        if ($data['type'] !== 'code_master') { return null; }
         if (!isset($data['fields']) || !is_array($data['fields'])) { $data['fields'] = array(); }
         $data['fields'] = array_merge($data['fields'], array(
             'code' => _('Code'),
