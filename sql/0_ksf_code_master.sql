@@ -1,7 +1,7 @@
 -- ksf_FA_CodeMaster: common code master table
 -- All ref codes across modules live here, namespaced by code_type.
--- Modules register their own code_type values (e.g. 'hrm.pay_grade', 'hrm.event_code',
--- 'crm.lead_status', etc.) and administer codes through this shared table.
+-- Modules register their own code_type values (e.g. 'hrm.pay_grade', 'hrm.activity_code',
+-- 'hrm.event_code', 'crm.lead_status', etc.) and administer codes through this shared table.
 
 CREATE TABLE IF NOT EXISTS `0_ksf_code_master` (
   `id`            INT(11) NOT NULL AUTO_INCREMENT,
@@ -21,17 +21,19 @@ CREATE TABLE IF NOT EXISTS `0_ksf_code_master` (
   KEY `idx_active` (`is_active`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Seed common HRM event codes (replaces hardcoded INSERT in ksf_FA_HRM_TimeTracking)
+-- Seed common HRM activity codes (replaces hardcoded INSERT in ksf_FA_HRM_TimeTracking)
 INSERT IGNORE INTO `0_ksf_code_master` (`code_type`, `code_value`, `code_name`, `code_description`, `usage_instructions`, `is_active`, `sort_order`) VALUES
-('hrm.event_code', 'REG', 'Regular Time', 'Standard work hours at base rate', 'Use for normal scheduled work hours', 1, 1),
-('hrm.event_code', 'OT', 'Overtime', 'Overtime hours at 1.5x base rate', 'Use for hours beyond standard schedule requiring overtime pay', 1, 2),
-('hrm.event_code', 'OT2', 'Double Overtime', 'Overtime hours at 2.0x base rate', 'Use for hours requiring double-time pay', 1, 3),
-('hrm.event_code', 'HOL', 'Holiday', 'Holiday work at 2.0x base rate', 'Use for work performed on designated holidays', 1, 4),
-('hrm.event_code', 'SICK', 'Sick Leave', 'Sick leave (paid from salary)', 'Use when employee is absent due to illness', 1, 5),
-('hrm.event_code', 'VAC', 'Vacation', 'Vacation leave (paid from salary)', 'Use for approved vacation time off', 1, 6),
-('hrm.event_code', 'COMM', 'Commission', 'Commission-based earnings', 'Use for commission earnings, not hourly-based', 1, 7),
-('hrm.event_code', 'BEREAVE', 'Bereavement', 'Bereavement leave (paid)', 'Use for bereavement leave', 1, 8),
-('hrm.event_code', 'JURY', 'Jury Duty', 'Jury duty (paid)', 'Use for jury duty service', 1, 9);
+('hrm.activity_code', 'REG', 'Regular Time', 'Standard work hours at base rate', 'Use for normal scheduled work hours', 1, 1),
+('hrm.activity_code', 'MEET', 'Meeting', 'Meeting attendance', 'Use for internal or external meetings', 1, 2),
+('hrm.activity_code', 'TRNG', 'Training', 'Training and skill development', 'Use for training sessions, workshops, courses', 1, 3),
+('hrm.activity_code', 'ADMIN', 'Administrative', 'Administrative tasks', 'Use for administrative work not tied to a specific project activity', 1, 4),
+('hrm.activity_code', 'CODING', 'Software Development/Coding', 'Software development and coding', 'Use for writing code, implementation', 1, 5),
+('hrm.activity_code', 'DESIGN', 'Software Design', 'Software design and architecture', 'Use for system design, architecture, planning', 1, 6),
+('hrm.activity_code', 'TEST', 'Testing/QA', 'Testing and quality assurance', 'Use for test execution, QA, bug verification', 1, 7),
+('hrm.activity_code', 'CODE_REVIEW', 'Code Review', 'Code review and peer review', 'Use for reviewing code changes', 1, 8),
+('hrm.activity_code', 'DEBUG', 'Debugging', 'Debugging and troubleshooting', 'Use for bug investigation and fixing', 1, 9),
+('hrm.activity_code', 'DOCUMENT', 'Documentation', 'Documentation and technical writing', 'Use for writing docs, specs, comments', 1, 10),
+('hrm.activity_code', 'DEPLOY', 'Deployment/Release', 'Deployment and release activities', 'Use for deploying code, releases', 1, 11);
 
 -- Seed common pay grade codes
 INSERT IGNORE INTO `0_ksf_code_master` (`code_type`, `code_value`, `code_name`, `code_description`, `usage_instructions`, `is_active`, `sort_order`) VALUES
