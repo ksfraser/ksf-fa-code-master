@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 namespace Ksfraser\FrontAccounting\CodeMaster\DTO;
+/**
+ * @BABOK Related: BR-CM-001
+ * @BABOK Related: BR-CM-002
+ */
 final class CodeMasterDTO {
     public $id;
     public $codeType;
@@ -11,6 +15,9 @@ final class CodeMasterDTO {
     public $isActive;
     public $sortOrder;
     public $createdAt;
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function __construct(
         int $id,
         string $codeType = '',
@@ -32,11 +39,17 @@ final class CodeMasterDTO {
         $this->sortOrder = $sortOrder;
         $this->createdAt = $createdAt;
     }
+    /**
+     * @BABOK Related: BR-CM-003
+     */
     public function getDisplayLabel(): string {
         if ($this->codeName !== '') { return $this->codeName; }
         if ($this->codeValue !== '') { return $this->codeValue; }
         return _('Code #') . (string) $this->id;
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function toArray(): array {
         return array(
             'id' => $this->id,
@@ -50,6 +63,9 @@ final class CodeMasterDTO {
             'created_at' => $this->createdAt,
         );
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public static function fromArray(array $data): self {
         return new self(
             (int) ($data['id'] ?? 0),

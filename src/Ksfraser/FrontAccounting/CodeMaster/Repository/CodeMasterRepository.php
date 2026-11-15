@@ -1,8 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace Ksfraser\FrontAccounting\CodeMaster\Repository;
+/**
+ * @BABOK Related: BR-CM-001
+ */
 final class CodeMasterRepository {
     private string $table = 'ksf_code_master';
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function findAll(): array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return array(); }
         $sql = "SELECT * FROM " . TB_PREF . $this->table . " ORDER BY code_type ASC, sort_order ASC, code_value ASC";
@@ -12,6 +18,9 @@ final class CodeMasterRepository {
         while (($row = db_fetch_assoc($result)) !== false && $row !== null) { $rows[] = $row; }
         return $rows;
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function findById(int $id): ?array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return null; }
         $sql = "SELECT * FROM " . TB_PREF . $this->table . " WHERE id = " . (int) $id;
@@ -20,6 +29,9 @@ final class CodeMasterRepository {
         $row = db_fetch_assoc($result);
         return $row === false ? null : $row;
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function findByTypeAndValue(string $codeType, string $codeValue): ?array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return null; }
         $sql = "SELECT * FROM " . TB_PREF . $this->table
@@ -31,6 +43,9 @@ final class CodeMasterRepository {
         $row = db_fetch_assoc($result);
         return $row === false ? null : $row;
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function findByType(string $codeType): array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return array(); }
         $sql = "SELECT * FROM " . TB_PREF . $this->table
@@ -43,6 +58,9 @@ final class CodeMasterRepository {
         while (($row = db_fetch_assoc($result)) !== false && $row !== null) { $rows[] = $row; }
         return $rows;
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function save(array $data): int {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return 0; }
         // Ensure uniqueness of code_type + code_value
@@ -67,6 +85,9 @@ final class CodeMasterRepository {
         db_query($sql, 'Could not save code master');
         return db_insert_id();
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function update(int $id, array $data): void {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return; }
         $sets = [];
@@ -80,6 +101,9 @@ final class CodeMasterRepository {
         $sql = "UPDATE " . TB_PREF . $this->table . " SET " . implode(', ', $sets) . " WHERE id = " . (int) $id;
         db_query($sql, 'Could not update code master');
     }
+    /**
+     * @BABOK Related: BR-CM-001
+     */
     public function delete(int $id): void {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return; }
         $sql = "DELETE FROM " . TB_PREF . $this->table . " WHERE id = " . (int) $id;
